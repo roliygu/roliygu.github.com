@@ -11,11 +11,11 @@ if ($(window).width() <= 1280) {
 
 // Variables
     tag1       = $('.pl__all'),
-    tag2       = $('.programming__language'),
-    tag3       = $('.operating__system'),
-    tag4       = $('.software'),
-    tag5       = $('.my__project'),
-    tag6       = $('.informal__essay');
+    tag2       = $('.pl'),
+    tag3       = $('.ml'),
+    tag4       = $('.sf'),
+    tag5       = $('.pro'),
+    tag6       = $('.ie');
 var sidebar    = $('#sidebar'),
     container  = $('#post'),
     content    = $('#pjax'),

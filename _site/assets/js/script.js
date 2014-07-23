@@ -11,8 +11,8 @@ if ($(window).width() <= 1280) {
 
 // Variables
     tag1       = $('.pl__all'),
-    tag2       = $('.programming__language'),
-    tag3       = $('.operating__system'),
+    tag2       = $('.pr__la'),
+    tag3       = $('.ma__learn'),
     tag4       = $('.software'),
     tag5       = $('.my__project'),
     tag6       = $('.informal__essay');

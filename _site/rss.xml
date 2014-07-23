@@ -6,16 +6,16 @@
     <atom:link href="place_your_blog_url_here/rss.xml" rel="self" type="application/rss+xml" />
     <description>place_your_blog_description_here</description>
     <language>place_your_blog_language_here</language>
-    <pubDate>Thu, 24 Jul 2014 02:08:37 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Jul 2014 02:08:37 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Jul 2014 02:58:33 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Jul 2014 02:58:33 +0800</lastBuildDate>
 
     
     <item>
       <title>Welcome to Jekyll!</title>
-      <link>place_your_blog_url_here/programming__language/2014/07/24/welcome-to-jekyll.html</link>
+      <link>place_your_blog_url_here/software/2014/07/24/welcome-to-jekyll.html</link>
       <pubDate>24 Jul 2014</pubDate>
       <author>place_your_name_here</author>
-      <guid>place_your_blog_url_here/programming__language/2014/07/24/welcome-to-jekyll</guid>
+      <guid>place_your_blog_url_here/software/2014/07/24/welcome-to-jekyll</guid>
       <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
 To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
 
