@@ -1,425 +1,239 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://www.zybuluo.com/Roliy/note/23742 -->
+<html class="theme theme-white"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    
+    <meta name="description" content="Cmd Markdown 编辑阅读器，支持实时同步预览，区分写作和阅读模式，支持在线存储，分享文稿网址。">
+    <meta name="author" content="Jiawei Zhang">
 
-<!-- saved from url=(0057)file:///C:/Users/Roliy/AppData/Local/Temp;/tmpbma3d5.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><style>html { 
-    font-size: 100%; 
-    overflow-y: scroll; 
-    -webkit-text-size-adjust: 100%; 
-    -ms-text-size-adjust: 100%; 
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body{
-    font-family: helvetica, arial, freesans, clean, sans-serif;
-    color: #333;
-    background-color: #fff;
-    border-color: #999999;
-    border-width: 2px;
-    line-height: 1.5;
-    margin: 2em 3em;
-    text-align:left;
-    padding: 0 100px 0 100px;
-}
+    
+    <title>Roliy的个人博客 - 作业部落 Cmd Markdown 编辑阅读器</title>
 
-pre{
-    background-color: #eee;
-    padding: 10px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    overflow: auto;
-}
-code{
-    background-color: #eee;
-    padding: 1px 3px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px; 
-}
-pre code {
-    padding-left: 0px;
-    padding-right: 0px;
-}
-li p{
-    margin: 0.3em;
-}
-ul > li{
-    list-style-type: disc;
-}
-a:link, a:visited{
-    color: #33e;
-    text-decoration: none;
-}
-a:hover{
-    color: #00f;
-    text-shadow:1px 1px 2px #ccf;
-    text-decoration:underline;
-}
-h1{
-    color: #999;
-    font-weight: 400;
-    font-size: 36px;
-}
-h2{
-    border-bottom: 1px dotted #aaa;
-    margin-bottom: 1em;
-    color: #333;
-    font-size: 30px;
-}
-h3{
-    color: #666;
-    font-size: 24px;
-}
-h4 {
-    font-size: 21px;
-}
-h5 {
-    font-size: 18px;
-}
-.shadow{
-    -webkit-box-shadow:0 5px 15px #000;
-    -moz-box-shadow:0 5px 15px #000;
-    box-shadow:0 5px 15px #000;     
-}
-</style></head><body><h1>RoliyOS-My small OS</h1>
-<h2>笔记与说明：</h2>
-<h3>前言</h3>
-<pre><code>这个projet来源于《30天自制操作系统》一书，也是为了锻炼一下底层编程和管理多个源文件的能力
-这里的笔记先按照章节的顺序整理一下，之后再考虑其他更好的整理方式
-</code></pre>
-<h3>Makefile</h3>
-<h4>命令</h4>
-<blockquote>
-<p>run命令：将制作好的img（即镜像文件）导入虚拟机</p>
-<blockquote>
-<p>copy %.img ../z__tools/qemu/fdimage0.bin<br>
-../z_tools/make.exe -C ../z_tools/qemu</p>
-</blockquote>
-<p>install命令：将制作好的img镜像文件烧进软盘中</p>
-<blockquote>
-<p>../z_tools/imgtol.com w a: %.img</p>
-</blockquote>
-<p>nask命令：将[.nas,]编译成[.bin,]文件</p>
-<blockquote>
-<p>../z_tools/nase.exe %.nas %.bin</p>
-</blockquote>
-<p>edimg命令：将[.bin,.sys,]文件编译成img文件</p>
-<blockquote>
-<p>../z_tools/edimg.exe imgin:../z_tools/fdimg0at.tek wbing src:%.bin len:512
-from:0 to:0 imgout: %.img</p>
-</blockquote>
-</blockquote>
-<h4>Makefile格式</h4>
+
+    <link href="https://www.zybuluo.com/static/img/favicon.png" type="image/x-icon" rel="icon">
+
+    <link href="https://www.zybuluo.com/static/assets/9b84e41b.base.lib.min.css" rel="stylesheet" media="screen">
+
+    <link href="https://www.zybuluo.com/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    
+    <!-- id="prettify-style" will be used to get the link element below and change href to change prettify code style, so it can't be in beginmin/endmin block. -->
+    <link id="prettify-style" href="./index_files/prettify-cmd.css" type="text/css" rel="stylesheet">
+    <link href="https://www.zybuluo.com/static/assets/mdeditor/8eb06c40.layout.min.css" rel="stylesheet" media="screen">
+
+
+    
+
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44461741-1', 'zybuluo.com');
+      ga('send', 'pageview');
+    </script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style>@-moz-keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}@-webkit-keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}@-o-keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}@keyframes nodeInserted{from{opacity:0.99;}to{opacity:1;}}embed,object{animation-duration:.001s;-ms-animation-duration:.001s;-moz-animation-duration:.001s;-webkit-animation-duration:.001s;-o-animation-duration:.001s;animation-name:nodeInserted;-ms-animation-name:nodeInserted;-moz-animation-name:nodeInserted;-webkit-animation-name:nodeInserted;-o-animation-name:nodeInserted;}</style></head>
+
+<body class="theme theme-white"><div id="MathJax_Message" style="display: none;"></div>
+
+    <!-- zybuluo's body -->
+    
+
+
+
+
+
+
+
+<!-- mdeditor's body -->
+
+
+
+
+
+
+<div id="editor-reader-full" class="editor-reader-full-shown" style="position: static;">
+    <div id="reader-full-topInfo" class="reader-full-topInfo-shown">
+        <span>
+            <code>@Roliy</code>
+        </span>
+        <code><span class="article-updated-date">2014-07-23 20:50</span></code>
+        <code><span>字数 </span><span class="article-characters">131</span></code>
+        <code><span>阅读 </span><span class="article-read">1</span></code>
+    </div>
+    <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader"><div class="md-section-divider"></div>
+
+<div class="md-section-divider"></div>
+
+<h1 id="roliy的个人博客">Roliy的个人博客</h1>
+
+<p>总觉得还是需要一个blog来纪录和展示一些有意思的东西.虽然之前也有开新浪 <br>
+和CSDN的博客,奈何长时间不维护也没啥兴趣在旧地方继续下去,所以咯,采用<strong>MarkDown</strong>,<strong>SublimeText2</strong>，<strong>GitHub</strong>搭起了这个简单的个人小站,望 <br>
+大家喜欢.</p></div>
+<iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe></div>
+
+<!--in page preview buttons. -->
+<div class="in-page-preview-buttons in-page-preview-buttons-full-reader">
+    <ul>
+        <li class="in-page-button dropdown" id="preview-toc-button" title="内容目录 Ctrl+Alt+O">
+            <span class="dropdown-toggle icon-list" data-toggle="dropdown" style="color: rgba(102, 128, 153, 0.45098);"></span>
+            <div id="toc-list" class="dropdown-menu theme pull-right theme-white"> <!-- Add theme means this element will be changed when apply theme color. -->
+                <h3>内容目录</h3>
+                <hr>
+                <div class="table-of-contents"><div class="toc">
 <ul>
-<li>输出文件 : 输入文件 Makefile <br> ../z_tools/xxx.exe xxxx xxxx</li>
-<li>使用make命令来生成目标文件时，使用<code>make -r xxx</code> 将会递归式的生成xxx</li>
-<li>使用%来代替文件名，以此写出的命令将按后缀名匹配文件来make</li>
-<li>命令: 程序路径 -r 目标文件 e.g.  img : ../z_tools/make.exe -r
-%.img</li>
-<li>Makefile中可以定义变量，如下的方法：<br> TOOLPATH = ../z_tools/ <br> 以后需
-要使用 <code>../z_tools/</code> 时，用 <code>$(TOOLPATH)</code> 代替</li>
-<li>del 文件名 "删除文件</li>
+<li><a href="https://www.zybuluo.com/Roliy/note/23742#roliy的个人博客">Roliy的个人博客</a></li>
 </ul>
-<h3>开发OS的步骤：</h3>
-<ul>
-<li>在Windows系统上编写源代码</li>
-<li>用C语言编译器编译源代码，生成机器语言文件</li>
-<li>对机器语言文件进行加工，生成映像文件</li>
-<li>将映像文件写入磁盘，做成OS的启动盘</li>
+</div>
+</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div id="reader-full-toolbar" class="reader-full-toolbar-shown" style="padding-top: 0;">
+    <ul id="reader-full-toolbar-home" class="preview-button-row">
+        <li class="preview-button-full-reader" id="preview-editor-button" title="撰写文本 Ctrl+Alt+M">
+            <span class="icon-pencil" style="color: rgb(187, 187, 187);"></span>
+        </li>
+    </ul>
+    <ul id="preview-button-row" class="preview-button-row">
+        <li class="preview-button-full-reader dropdown" id="preview-list-button" title="文本列表 Ctrl+Alt+F">
+            <span class="dropdown-toggle icon-reorder" data-toggle="dropdown" style="color: rgb(187, 187, 187);"></span>
+            <ul id="file-list" class="dropdown-menu theme-black pull-right" role="menu" style="max-height: 407px;">
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="未分类">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">未分类</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2014-07-23 20:50:58">
+        <a tabindex="-1" href="./index_files/index.html" title="【已发布】 2014-07-23 20:50">
+        <i class="icon-share-sign"></i>
+        <span id="23742" class="whiter-on-black">Roliy的个人博客</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+            </ul>
+            <ul id="file-list-topbar" class="dropdown-menu theme-black pull-right" role="menu">
+                <li id="search-file-bar">
+                    <i class="icon-search icon-large"></i>
+                    <input type="text" id="search-file-textbox" placeholder="搜索 Roliy 的文本， * 显示全部">
+                    <i class="icon-level-down icon-rotate-90 icon-large"></i>
+                </li>
+                <li id="tag-file-bar">
+                    以下【标签】将用于标记这篇文稿：
+                </li>
+            </ul>
+        </li>
+        <li class="preview-button-full-reader" id="preview-theme-button" title="主题切换 Ctrl+Alt+J">
+            <span class="icon-adjust" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader" id="preview-fullscreen-button" title="全屏模式 F11">
+            <span class="icon-fullscreen" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader wmd-spacer"></li>
+        <li class="preview-button-full-reader dropdown" id="preview-about-button" title="关于本站">
+            <span class="dropdown-toggle icon-info-sign" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="true" style="color: rgb(187, 187, 187);"></span>
+            <ul id="about-menu" class="dropdown-menu theme-black pull-right" role="menu">
+                <li title="support@zybuluo.com"><a tabindex="-1" href="mailto:support@zybuluo.com" target="_blank"><i class="icon-envelope"></i>联系我们</a></li>
+                <li title="@ghosert"><a tabindex="-1" href="http://www.weibo.com/ghosert" target="_blank"><i class="icon-weibo"></i>关注开发者</a></li>
+                <li title=""><a tabindex="-1" href="https://github.com/ghosert/cmd-editor/issues" target="_blank"><i class="icon-github-alt"></i>报告问题，建议</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<ul id="reader-full-toolbar-tail" class="reader-full-toolbar-tail-shown">
+    <li class="preview-button-full-reader" id="preview-hidden-button" title="隐藏工具栏 Ctrl+Alt+I">
+        <span class="icon-chevron-sign-right" style="color: rgb(187, 187, 187);"></span>
+    </li>
 </ul>
-<h3>制作3.5英寸软盘的系统启动盘：</h3>
-<pre><code>除了地址000000-000090和0001F0-0014000的内容要修改以外，其他部分内容全为0
-</code></pre>
-<h3>汇编指令</h3>
-<ul>
-<li>ORG 0x7c00 ：指明了将本程序装载到该内存地址</li>
-<li>HLT ：让CPU停止动作，进入待机状态</li>
-</ul>
-<h3>寄存器</h3>
-<blockquote>
-<p>16位寄存器</p>
-<blockquote>
-<p>AX 累加寄存器,被ADD指令使用时，生成的机器码比其他短<br>
-CX 计数寄存器<br>
-DX 数据寄存器<br>
-BX 基址寄存器<br>
-SP 栈指针寄存器<br>
-BP 基址指针寄存器<br>
-SI 源变址寄存器<br>
-DI 目的变址寄存器<br>
-ES 附加段寄存器<br>
-CS 代码段寄存器<br>
-SS 栈段寄存器<br>
-DS 数据段寄存器<br></p>
-</blockquote>
-<p>AX,CX,DX,BX可以被拆成高低8位寄存器</p>
-<p>EAX,ECX,EDX,EBX,ESP,EBP,ESI,EDI为32位寄存器</p>
-<blockquote>
-<p>C语言只能使用到EAX，ECX和EDX三个32位寄存器</p>
-</blockquote>
-</blockquote>
-<h3>BIOS的命令,必须在16位下</h3>
-<h4>显示一个字符</h4>
-<pre><code>AH=0x0e
-AL=character code
-BH=0
-BL=color code
-INT 0x10
-</code></pre>
-<h4>检验磁盘</h4>
-<pre><code>AH=0x02 ;读盘
-AH=0x03 ;写盘
-AH=0x04 ;校验
-AH=0x0c ;寻道
-AL=处理对象的扇区数
-CH=柱面号&amp;0xff
-CL=扇区号（0-5位）|（柱面号&amp;0x300）&gt;&gt;2;
-DH=磁头号
-DL=驱动器号
-ES:BX=缓冲地址
-返回值：
-    FLACS.CF=0 :没有错误
-    FLACS.CF=1 :有错误，错误码存进AH内
-</code></pre>
-<h4>设置显卡模式</h4>
-<ul>
-<li>AH=0x00;</li>
-<li>AL=模式:<ul>
-<li>0x03 : 16色字符模式, 80*25</li>
-<li>0x12 : VGA图形模式, 640<em>480</em>4位彩色模式，独特的4面存储模式</li>
-<li>0x13 : VGA图形模式, 320<em>200</em>8位彩色模式，调色板模式</li>
-<li>0x6a : 拓展VGA图形模式, 800<em>600</em>4位彩色模式，独特的4面存储模式</li>
-</ul>
-</li>
-<li><code>320*200*8</code> 的模式下VRAM的地址是0xa0000-0xaffff的64KB</li>
-</ul>
-<h4>关于调色板(虽然不是BIOS的内容，但是跟显卡模式是配套的)</h4>
-<pre><code>当前模式下，使用6位16进制数来表示一个颜色
-这6位拆成3个两位数，分别表示RGB值
-设置调色板，就是给一个无符号char数组，数组中从0开始，每连续三个元素表示一种颜色
-显色的过程就是往显存对应位置载入table[i],table[i+1],table[i+2]且i%3==0//其实就是往显存装6个字节的内容
-</code></pre>
-<ul>
-<li>使用的时候<ul>
-<li>记录中断许可标志值</li>
-<li>中断许可标志值设为0,禁止中断<br></li>
-<li>将0存进0x03c8[显卡某个端口] //相当于设置<br></li>
-<li>将table中连续三个三个字节存进0x03c9[显卡另一个端口]//设定颜色<br></li>
-<li>恢复中断许可标志<br></li>
-<li>往显存填颜色按照 <code>0xa0000+x+y*320</code>来计算地址<br></li>
-</ul>
-</li>
-</ul>
-<h4>读取键盘LED灯状态</h4>
-<ul>
-<li>MOV   AH,0x02</li>
-<li>INT   0x16</li>
-<li>MOV   [LEDS],AL</li>
-</ul>
-<h3>初始各个文件介绍</h3>
-<ul>
-<li>ipl10.nas    : 启动区，检查软盘柱面是否有错</li>
-<li>asmhead.nas  : 暂时没有说明，完成BIOS阶段的任务和16位到32位模式的转换</li>
-<li>bootpack.c   : OS的主文件<ul>
-<li>主函数名必须是 <code>HariMain</code> </li>
-</ul>
-</li>
-<li>graphic.c    : 绘图相关C语言操作</li>
-<li>dsctbl.c     : 设置GDT和IDT</li>
-<li>
-<p>naskfunc.nas : C语言需要(只有汇编能办到)的功能，定义在这里</p>
-<ul>
-<li>函数名前加<code>_</code></li>
-<li>函数要在<code>GLOBAL</code>中声明</li>
-<li>例子<ul>
-<li>GLOBAL  _io_hlt</li>
-<li>_io_hlt:</li>
-<li>HLT</li>
-<li>RET</li>
-</ul>
-</li>
-<li>C文件中对应的函数参数在汇编中使用寄存器和内存地址来表示</li>
-<li>第一个参数在ESP+4的位置,后面的依次加4（当然，参数是int的情况下）</li>
-<li>执行RET语句时，EAX中的值被当作函数的返回值</li>
-<li>标志寄存器的值不能直接传到其他寄存器，需要借助栈</li>
-</ul>
-</li>
-<li>
-<p>hankaku.txt  : 字库文件</p>
-</li>
-</ul>
-<h4>GDT 全局段号记录表</h4>
-<ul>
-<li>内存分段模式下，每个段使用一个数据结构Segment来唯一表示，该数据结构包括：<ul>
-<li>段大小</li>
-<li>段起始地址</li>
-<li>段管理属性[禁止写入，禁止执行，系统专用]
-这部分内容，大小一共是8个字节(64bits)</li>
-</ul>
-</li>
-<li>段寄存器只有16位,无法装下Segment,所以使用GDT(作为检索表)来使用某个段<ul>
-<li>段寄存器低3位无法使用，故只能表示8192个段</li>
-<li>段寄存器存的是<code>段号</code></li>
-<li>系统根据<code>段号</code>到GDT中查找实际的<code>Segment</code></li>
-</ul>
-</li>
-<li>大致可以认为，GDT是一个表，表的每项包括[段号,对应的Segment]</li>
-<li>GDT的起始地址保存在GDTR寄存器中</li>
-<li>Segment{limit_low, base_low;base_mid, access_right;limit_hign, base_high;}<ul>
-<li>段地址为32位，分成base_low,base_mid和base_high三段</li>
-<li>段(大小)上限为4G，分为limit_low和limit_high两部分，注意单位是页(4KB)，limit_high只用高4位</li>
-<li>权限一共12位，高位4位放在limit_high的高4位，低位8位放在access_right中<ul>
-<li>高四位的第一位取0或1对应将段上限解释为以字节和页为单位</li>
-<li>低8位<ul>
-<li>0x00  未使用</li>
-<li>0x92  系统专用，可读写，不可执行</li>
-<li>0x9a  系统专用，可执行，可读不可写</li>
-<li>0xf2  应用程序用，可读写，不可执行</li>
-<li>0xfa  应用程序用，可执行，可读不可写</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4>IDT 中断记录表</h4>
-<h4>PIC 可编程中断控制器</h4>
-<h3>各个文件转换的过程,函数名是调用的程序，参数的最后一个是输出文件，其他都是输入文件</h3>
-<ul>
-<li>ccl(%.c, %gas)</li>
-<li>gas2nask(%.gas, %.nas)</li>
-<li>nask(%.nas, %.obj)</li>
-<li>obi2bim(%.obj, %.bim)</li>
-<li>bim2hrb(%.bim, %.hrb)</li>
-<li>copy(%.hrb, asmhead.bim, %.sys)</li>
-<li>makefont(%.txt, %.bin)</li>
-<li>bin2obj(%.bin, %.obj)</li>
-<li>edimg(%.bin, [%.sys,] %.img)</li>
-<li>具体的转换过程参考<a href="file:///C:/%E5%9B%BE%E7%A4%BA/%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E5%9B%BE.bmp">此图</a></li>
-</ul>
-<h3>注意</h3>
-<ul>
-<li>磁盘上的内容从内存的0x8000号地址开始装载</li>
-<li>32位模式不能调用BIOS功能</li>
-<li>RESB命令将会空出对应数目的字节，并填0</li>
-<li><code>RESB 0x1fe-$</code>中的<code>$</code>符号代表了这一行在文件中是第几个字节</li>
-<li>软盘的第一个扇区称作启动区，计算机会检查该扇区最后两个字节是否是<code>55AA</code>来判断该软盘是否是启动盘</li>
-</ul>
-<h3>键盘控制电路，键盘和鼠标</h3>
-<h3>内存管理</h3>
-<ul>
-<li>采用FreeInfo:{块首地址,块大小}来表示一个空闲内存块</li>
-<li>采用Memman:{FreeInfo数组,空闲块数,..,}表示全部空闲内存块</li>
-<li>每次需要分配一块内存时,到Memman中找合适的块,将其切割开，返回需要的那块的首地址</li>
-<li>每次回收时,到Memman中找到合适位置[Memman中每块一定不会相交,且首地址严格递增]<ul>
-<li>可能会和前块or后块合并</li>
-</ul>
-</li>
-<li>提供4k分配和回收,使得每次申请按照固定块大小管理,避免小碎片</li>
-</ul>
-<h3>显示相关</h3>
-<ul>
-<li>引入<code>图层</code>的概念,每次刷新按图层刷新<ul>
-<li>Sheet:{buf,bxsize,bysize,vx0,vy0,col_inv,hight,flags}</li>
-<li>每个图层包括,一个bxsize*bysize大小的图像数据区buf,该图层在画面上的坐标{vx0,vy0},图层高度、透明度、标记;</li>
-<li>标记为0表示未使用,1表示已使用</li>
-<li>通过设置<code>图层</code>的高度[设置成负数表示隐藏]改变贴图的顺序,每次刷新从低图层刷到top图层</li>
-</ul>
-</li>
-<li>采用一个长度为256的<code>图层数组</code>来管理所有图层</li>
-<li>图层刷新示意图
-    <img alt="图层刷新示意图" src="file:///C:/%E5%9B%BE%E7%A4%BA/%E5%9B%BE%E5%B1%82%E5%88%B7%E6%96%B0%E7%A4%BA%E6%84%8F.bmp"></li>
-</ul>
-<h3>内存分布</h3>
-<pre><code>0x00000000 - 0x000fffff :BIOS显存之类(1M)
-0x00100000 - 0x00267fff :保存软盘内容（1440K）
-0x00268000 - 0x0026f7ff :空(30K)
-0x0026f800 - 0x0026ffff :IDT(2K)
-0x00270000 - 0x0027ffff :GDT(64K)
-0x00280000 - 0x002fffff :bootpack.hrb(512K)
-0x00300000 - 0x003fffff :栈和其他(1M)
-0x00400000 -            :空
-</code></pre>
-<h2>版本说明：</h2>
-<h3>V1.1.3</h3>
-<pre><code>用变量的方式修改了Makefile
-增加了检测扇区是否错误的代码
-</code></pre>
-<h3>V1.1.4</h3>
-<pre><code>将检测扇区错误扩展到了柱面层次，并加入了定义常量的语句
-</code></pre>
-<h3>V1.1.5</h3>
-<pre><code>新增了haribote.nas：将fin函数单独写到了这个文件中
-修改了ipl.nas和Mackfile文件
-    ipl.nas 将fin函数的地址设置为haribote中的位置了
-    Makefile文件修改了制造img的语句，输入变成了haribote.sys和ipl.bin等
-</code></pre>
-<h3>V1.1.5.1</h3>
-<pre><code>修改了haribote.nas文件，使得调用后屏幕全黑
-</code></pre>
-<h3>V1.1.6</h3>
-<pre><code>修改了haribote.nas文件，在进入32位状态前收集好BIOS信息，[因为进入32位状态后，再回来收集信息会很麻烦]
-</code></pre>
-<h3>V1.1.7</h3>
-<pre><code>修改了haribote.nas文件，将其重命名为asmhead.nas，其包含了原来haribote.nas的汇编功能和将C的机器语言和汇编混合的功能
-新增了bootpack.c文件，作为用C语言开发的基础
-修改了Makfile文件，主要增加了将c文件编译成.hrb，然后和sys混编成img的处理
-</code></pre>
-<h3>V1.1.8</h3>
-<pre><code>增加了naskfunc.nas文件，其中包括HLT功能的汇编函数
-修改了bootpack.c文件，直接调用naskfunc.nas里的汇编函数
-修改Makefile，连接的时候，把naskfunc.nas文件连接到bootpack的中间文件里
-</code></pre>
-<h3>V2.1.1</h3>
-<pre><code>修改了naskfunc.nas文件，增加了往显存写入数据的函数
-修改了bootpack.c文件，往显存写入数据
-</code></pre>
-<h3>V2.1.2</h3>
-<pre><code>使用指针来往内存写内容
-</code></pre>
-<h3>V2.1.3</h3>
-<pre><code>修改了bootpack.c文件，增加了调色板设置
-修改了naskfunc.nas文件，增加了往端口读写数据的函数，和读写标志寄存去Eflags的函数
-</code></pre>
-<h3>V2.1.4</h3>
-<pre><code>修改了bootpack.c文件，增加了画出矩形的函数
-</code></pre>
-<h3>V2.1.5</h3>
-<pre><code>增加了hankaku文件：ASCII字符库
-修改了Makefile文件，在编译时将字符库文件一起编译
-修改了bootpack.c文件，成功输出“Roliy”
-</code></pre>
-<h3>V2.1.6</h3>
-<pre><code>修改了bootpack.c文件，使用了sprint()函数
-修改了bootpack.c文件，增加了初始化GDT和IDT的函数
-修改了naskfunc.nas文件，增加了初始化GDT和IDT的汇编实现
-</code></pre>
-<h3>V3.1.1</h3>
-<pre><code>将bootpack.c文件按功能分成了bootpack.c,dsctbl.c和graphic.c三个文件
-修改了Makefile文件,支持分割以后的文件的编译
-</code></pre>
-<h3>V3.1.2</h3>
-<pre><code>新增int.c文件，初始化PIC
-修改bootpack.c,bootpack.h和Makefile文件来编译
-</code></pre>
-<h3>V3.1.3</h3>
-<pre><code>修改了naskfunc.nas,dsctbl.c,bootpack.h,bottpack.c,int.c文件，增加了处理键盘中断的部分
-</code></pre>
-<h3>V4.1</h3>
-<pre><code>详细处理了键盘和鼠标中断:完成从按键到屏幕显示的实现
-增加了两个文件：
-    equipment.c是鼠标和键盘准备的函数，之后可能会混合仅int.c中
-    datastructure.c基础数据结构，目前实现了`队列`，用作鼠标键盘缓冲区
-</code></pre>
-<h3>V5.1</h3>
-<pre><code>实现了移动鼠标的功能,源文件分割成其他文件
-</code></pre>
-<h3>V6.1</h3>
-<pre><code>内存管理[未完成]
-</code></pre>
-<h3>V6.2</h3>
-<pre><code>完成内存释放部分
-</code></pre>
-<h3>V7.1</h3>
-<pre><code>内存4K处理
-显示采用多图层贴图来刷新显示
-</code></pre></body></html>
+
+
+
+
+
+
+
+    
+
+
+    <!-- Hidden Popup Modal -->
+    <div id="notification" class="modal hide fade theme theme-white" tabindex="-1" role="dialog" aria-labelledby="notification-title" aria-hidden="true">
+        <div class="modal-header theme theme-white">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="notification-title">通知</h3>
+        </div>
+        <div class="modal-body theme theme-white">
+            <p></p>
+        </div>
+        <div class="modal-footer theme theme-white">
+            <button id="notification-cancel" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button id="notification-confirm" class="btn btn-primary">确认</button>
+        </div>
+    </div>
+
+    <!-- zybuluo's foot -->
+
+    <script src="./index_files/1ebbdfb0.base.lib.min.js"></script>
+
+    
+    <!--mathjax-->
+    <script type="text/x-mathjax-config;executed=true">
+      MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true },  messageStyle: "none"});
+    </script>
+    <script src="./index_files/mathJax.js"></script>
+    <!--mathjax source code is here: https://github.com/mathjax/MathJax.-->
+    <script src="./index_files/mathJax(1).js"></script>
+
+    <script src="./index_files/4f710898.layout.min.js"></script>
+
+
+    
+
+    <script src="./index_files/f4e69405.user_note.lib.min.js"></script>
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.user_note');
+        com.zybuluo.mdeditor.user_note.initData = {
+            isLoggedIn: 'True',
+            mdeditorUrl: "https://www.zybuluo.com/mdeditor",
+        };
+    </script>
+
+    <script src="./index_files/aad7414f.user_note.min.js"></script>
+
+
+
+
+    
+</body></html>
