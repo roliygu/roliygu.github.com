@@ -6,9 +6,39 @@
     <atom:link href="place_your_blog_url_here/rss.xml" rel="self" type="application/rss+xml" />
     <description>place_your_blog_description_here</description>
     <language>place_your_blog_language_here</language>
-    <pubDate>Thu, 24 Jul 2014 21:31:30 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Jul 2014 21:31:30 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Jul 2014 22:58:22 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Jul 2014 22:58:22 +0800</lastBuildDate>
 
+    
+    <item>
+      <title>Roliy机器学习de资源目录</title>
+      <link>place_your_blog_url_here/ml/2014/07/25/MLres.html</link>
+      <pubDate>25 Jul 2014</pubDate>
+      <author>place_your_name_here</author>
+      <guid>place_your_blog_url_here/ml/2014/07/25/MLres</guid>
+      <description>&lt;p&gt;这里是Roliy的机器学习相关资源和推荐的地方~&lt;/p&gt;
+
+&lt;h2&gt;书籍&lt;/h2&gt;
+
+&lt;h4&gt;不得不说,个人看过的ML的书真是一只手就能数过来,这里就说说个人非常喜欢的一些吧&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;http://book.douban.com/subject/10590856/&quot;&gt;统计学习方法&lt;/a&gt;&lt;/strong&gt;,李航的这本&lt;code&gt;又小又薄&lt;/code&gt;的书满满的都是算法,对于简单粗暴、就喜欢算法和怎么实现的我来说,简直再适合不过了。加之其中用到的数学推导过程基本上不超过CS的数学范畴,看起来也不啥费劲。力荐之~&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;论文&lt;/h2&gt;
+
+&lt;h2&gt;网站&lt;/h2&gt;
+
+&lt;h4&gt;有些是个人blog,有些是...&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://beader.me/mlnotebook/&quot;&gt;机器学习基石-笔记&lt;/a&gt;,blog主的名字不太清楚,但是这套笔记的质量很高,内容概括得也很全,推荐之~&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;数据集&lt;/h2&gt;
+</description>
+    </item>
     
     <item>
       <title>Roliy常用的Git命令</title>
@@ -16,9 +46,7 @@
       <pubDate>25 Jul 2014</pubDate>
       <author>place_your_name_here</author>
       <guid>place_your_blog_url_here/sf/2014/07/25/Git</guid>
-      <description>&lt;h1&gt;Git&lt;/h1&gt;
-
-&lt;p&gt;这里是Roliy的Git命令备忘录,不是很适合新手.对于想学Git的爱好者,强烈推荐&lt;a href=&quot;http://book.douban.com/subject/4813786/&quot;&gt;版本控制之道&lt;/a&gt;.你会找到你需要的东西~&lt;/p&gt;
+      <description>&lt;p&gt;这里是Roliy的Git命令备忘录,不是很适合新手.对于想学Git的爱好者,强烈推荐&lt;a href=&quot;http://book.douban.com/subject/4813786/&quot;&gt;版本控制之道&lt;/a&gt;.你会找到你需要的东西~&lt;/p&gt;
 
 &lt;h3&gt;安装之后de初始化&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git config --global user.name &amp;quot;XXXXXXX&amp;quot;               #set username
