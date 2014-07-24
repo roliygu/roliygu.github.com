@@ -6,17 +6,90 @@
     <atom:link href="place_your_blog_url_here/rss.xml" rel="self" type="application/rss+xml" />
     <description>place_your_blog_description_here</description>
     <language>place_your_blog_language_here</language>
-    <pubDate>Thu, 24 Jul 2014 19:35:25 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Jul 2014 19:35:25 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Jul 2014 21:31:30 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Jul 2014 21:31:30 +0800</lastBuildDate>
 
     
     <item>
-      <title>《机器学习基石》笔记（1）</title>
-      <link>place_your_blog_url_here/ml/2014/07/25/MLP1.html</link>
+      <title>Roliy常用的Git命令</title>
+      <link>place_your_blog_url_here/sf/2014/07/25/Git.html</link>
       <pubDate>25 Jul 2014</pubDate>
       <author>place_your_name_here</author>
-      <guid>place_your_blog_url_here/ml/2014/07/25/MLP1</guid>
-      <description></description>
+      <guid>place_your_blog_url_here/sf/2014/07/25/Git</guid>
+      <description>&lt;h1&gt;Git&lt;/h1&gt;
+
+&lt;p&gt;这里是Roliy的Git命令备忘录,不是很适合新手.对于想学Git的爱好者,强烈推荐&lt;a href=&quot;http://book.douban.com/subject/4813786/&quot;&gt;版本控制之道&lt;/a&gt;.你会找到你需要的东西~&lt;/p&gt;
+
+&lt;h3&gt;安装之后de初始化&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git config --global user.name &amp;quot;XXXXXXX&amp;quot;               #set username
+git config --global user.email &amp;quot;XXXX@XXX.com&amp;quot;         #set email
+git config --global --list                            #listshow global setup
+git config --global color.ui &amp;quot;auto&amp;quot;/&amp;quot;false&amp;quot;/&amp;quot;true&amp;quot;    #使用不同颜色显示不同类型的内容
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;创建仓库和提交更新&lt;/h3&gt;
+
+&lt;h5&gt;个人理解：Git管理了三个空间,一个是实际硬盘空间,直接修改源文件的地方;一个是暂存区,也就是执行了add命令之后文件存在的地方;最后一个是版本仓库,也就是使用了commit命令之后文件存在的地方.&lt;/h5&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mkdir foldername                #这个是命令行创建文件夹命令嘛
+cd foldername
+git init                        #在文件夹目录下新建仓库
+git add filename.xx             #把文件添加到仓库中,前提是该文件在目录下
+git commit -m &amp;quot;add in hello&amp;quot;    #提交更  
+在源文件修改之后使用：
+git status                      #查看修改状态,会有红色标注,这时候使用：
+git add index.html              #再使用git status,文件会变成绿色,这时候使用：
+git commit -m &amp;quot;add &amp;lt;head&amp;gt; and &amp;lt;title&amp;gt; to index&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;创建分支&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git checkout -b x1 x2           #从x1分支创建x2分支,并切换到x2,与下两条指令合在一起等价
+git branch x1 x2                #从父分支x2创建分支x1，没有使用切换分支指令前，修改源文件,提交：
+git checkout x1                 #切换到之前创建的分支x1,这里认为,切换分支之前的修改提交是作用于“创建了x1分支的x2分支上
+                                #的”而x1分支则完全是x2分支(未修改)的拷贝.当然,如果修改发生在切换分支之后,则又不一样
+                                #了.切换到未修改的分支之后,所有源文件将会回复到原来状态.切换分支之后的修改相当于在“回
+                                #到过去”的原文件上修改.
+git checkout master             
+git rebase x1                   #将x1分支上的所有提交复制到当前分支上,此命令执行后,当前分支和x1分支一模一样
+git branch -d x1                #然后就可以删除x1分支了,大写D更强力一些
+git branch                      #显示分支名称,带*号的是当前分支
+git tag 1.0 x1                  #第一个参数是版本号,第二个参数是分支名.整个标签的意思是给(截至到目前所有文件修改到)
+                                #x1分支做一个版本号标记
+git tag                         #查看所有版本号
+git branch x1.1 1.0             #从标签1.0创建分支x1.1
+git merge x2                    #将x2分支的所有修改合并到当前分支
+                                #原文件状态是X,创建两条分支X1和X2,并在分支上修改,若要将X和X1或X2合并,则OK,若X1和X2分支
+                                #对同一个文件做了修改,将X1和X2合并时就会产生冲突.
+git mergr --squash x2           #相当于仅把x2分支内容提交到暂存区,之后还需要commit指令提交  
+git branch -m name1 name2       #把name1改成name2,大写的M更强力
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;版本回溯&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git revert 版本号                #撤销修改,版本号最好是前一个提交的版本号,这样不用处理冲突...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;打包&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git archive --format=zip --prefix=mysite-1.0/1.0 | gzip &amp;gt; mysite-1.0.zip
+git archive --format=tar --prefix=mysite-1.0/1.0 | gzip &amp;gt; mysite-1.0.tar.gz
+#两种打包压缩,第一种压缩成zip第二种压缩成gz;format的参数表明压缩类型,prefix参数表明目标目录,最后一部分表明压缩文件名称
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;查看日志&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git log                         #查看修改日志,可以加上&amp;#39;-具体数字&amp;#39;参数表示需要显示的条数
+git log -p                      #按照日志顺序显示版本间差异
+git log number                  #根据哈希码查看日志,前七位即可
+git log --since=&amp;quot;5 hours&amp;quot;       #查看5个小时内的提交记录
+git log number1...number2       #查看版本number1到number2之间的版本记录
+git blame file                  #按行输出file,每行前面会写该行提交的版本号和提交者,提交时间等
+git blame -L number1,number2 file #查看num1到num2行的记录
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;其他&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git add -i                      #删除暂存区里的提交；进入交互add界面,选择3.revert,再输入1
+文件开始状态为X1,修改之后为X2,此时使用add命令;再次修改源文件,状态为X3;也就是说版本库里文件是X1状态,暂存区文件是X2状态,实际硬盘上是X3状态,使用：
+git diff                        #将暂存区文件X2和硬盘文件X3做比较
+git diff --cached               #将暂存区X2和版本库X1做比较
+git diff head                   #将硬盘X3和版本库X1做比较
+git diff number                 #number是版本号,将当前状态和该版本比较
+git mv name1 name2              #将文件名name1改成name2,相当于(在硬盘上改名,并执行了add指令),但仍需要conmit指令提交到版本库
+初始状态为X,提交之后需要修改X,但是需要把两次修改作为一次提交(比如一些错误比较低级,不想让别人知道)：
+git commit -C head -a -amend
+git reset HEAD                  #复位HEAD提交,相当与删除了最新的一个提交记录,实际文件没有什么变化
+git gc                          #整理版本库,清理一些垃圾,根据提交日志,日志里没有的东西都会被删除.比如,之前复位了一些版本,文件还存在于硬盘上,执行本操作之后就复位的日志记录之后的修改都被删除了.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
