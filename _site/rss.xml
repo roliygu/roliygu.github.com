@@ -6,17 +6,26 @@
     <atom:link href="place_your_blog_url_here/rss.xml" rel="self" type="application/rss+xml" />
     <description>place_your_blog_description_here</description>
     <language>place_your_blog_language_here</language>
-    <pubDate>Thu, 24 Jul 2014 02:58:33 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Jul 2014 02:58:33 +0800</lastBuildDate>
+    <pubDate>Thu, 24 Jul 2014 19:35:25 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Jul 2014 19:35:25 +0800</lastBuildDate>
 
     
     <item>
+      <title>《机器学习基石》笔记（1）</title>
+      <link>place_your_blog_url_here/ml/2014/07/25/MLP1.html</link>
+      <pubDate>25 Jul 2014</pubDate>
+      <author>place_your_name_here</author>
+      <guid>place_your_blog_url_here/ml/2014/07/25/MLP1</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Welcome to Jekyll!</title>
-      <link>place_your_blog_url_here/software/2014/07/24/welcome-to-jekyll.html</link>
+      <link>place_your_blog_url_here/sf/2014/07/24/welcome-to-jekyll.html</link>
       <pubDate>24 Jul 2014</pubDate>
       <author>place_your_name_here</author>
-      <guid>place_your_blog_url_here/software/2014/07/24/welcome-to-jekyll</guid>
-      <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
+      <guid>place_your_blog_url_here/sf/2014/07/24/welcome-to-jekyll</guid>
+      <description>&lt;p&gt;You&amp;#39;ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
 To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
 
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
@@ -27,8 +36,7 @@ To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; direc
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;.&lt;/p&gt;
-
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll&amp;#39;s GitHub repo&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
