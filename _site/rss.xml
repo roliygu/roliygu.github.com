@@ -6,8 +6,8 @@
     <atom:link href="place_your_blog_url_here/rss.xml" rel="self" type="application/rss+xml" />
     <description>place_your_blog_description_here</description>
     <language>place_your_blog_language_here</language>
-    <pubDate>Thu, 24 Jul 2014 22:58:22 +0800</pubDate>
-    <lastBuildDate>Thu, 24 Jul 2014 22:58:22 +0800</lastBuildDate>
+    <pubDate>Mon, 11 Aug 2014 23:30:10 +0800</pubDate>
+    <lastBuildDate>Mon, 11 Aug 2014 23:30:10 +0800</lastBuildDate>
 
     
     <item>
@@ -48,15 +48,18 @@
       <guid>place_your_blog_url_here/sf/2014/07/25/Git</guid>
       <description>&lt;p&gt;这里是Roliy的Git命令备忘录,不是很适合新手.对于想学Git的爱好者,强烈推荐&lt;a href=&quot;http://book.douban.com/subject/4813786/&quot;&gt;版本控制之道&lt;/a&gt;.你会找到你需要的东西~&lt;/p&gt;
 
-&lt;h3&gt;安装之后de初始化&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git config --global user.name &amp;quot;XXXXXXX&amp;quot;               #set username
-git config --global user.email &amp;quot;XXXX@XXX.com&amp;quot;         #set email
-git config --global --list                            #listshow global setup
-git config --global color.ui &amp;quot;auto&amp;quot;/&amp;quot;false&amp;quot;/&amp;quot;true&amp;quot;    #使用不同颜色显示不同类型的内容
+&lt;h3&gt;安装之后初始化&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;config --global user.name &amp;quot;XXXXXXX&amp;quot;               # set username
+config --global user.email &amp;quot;XXXX@XXX.com&amp;quot;         # set email
+config --global --list                            # 显示全局设置
+config --global color.ui &amp;quot;auto&amp;quot;/&amp;quot;false&amp;quot;/&amp;quot;true&amp;quot;    # 使用不同颜色显示不同类型的内容
+config --global core.editor gvim.exe              # 将gvim设置为commit留言调用的编辑器,前提是gvim已经在环境变量里了
+git config --global merge.tool kdiff3
+git config --global mergetool.kdiff3.path &amp;quot;C:\Program Files\KDiff3\kdiff3.exe&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;创建仓库和提交更新&lt;/h3&gt;
 
-&lt;h5&gt;个人理解：Git管理了三个空间,一个是实际硬盘空间,直接修改源文件的地方;一个是暂存区,也就是执行了add命令之后文件存在的地方;最后一个是版本仓库,也就是使用了commit命令之后文件存在的地方.&lt;/h5&gt;
+&lt;p&gt;个人理解：Git管理了三个空间,一个是实际硬盘空间/工作区,直接修改源文件的地方;一个是暂存区,也就是执行了add命令之后文件存在的地方;最后一个是版本仓库,也就是使用了commit命令之后文件存在的地方.   &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mkdir foldername                #这个是命令行创建文件夹命令嘛
 cd foldername
 git init                        #在文件夹目录下新建仓库
@@ -66,8 +69,17 @@ git commit -m &amp;quot;add in hello&amp;quot;    #提交更
 git status                      #查看修改状态,会有红色标注,这时候使用：
 git add index.html              #再使用git status,文件会变成绿色,这时候使用：
 git commit -m &amp;quot;add &amp;lt;head&amp;gt; and &amp;lt;title&amp;gt; to index&amp;quot;
+add -i                          #进入交互模式,详解
+1:status    2:update    3:revert    4:add untracked
+5:patch     6:diff      7:quit      8:help
+add untracked   #添加未被git跟踪的文件到暂存区
+updata          #将被修改的文件(已被跟踪)加进暂存区
+revert          #将暂存区中的文件去掉,相当于取消add操作
+patch           #针对文件中被修改的块执行添加缓冲区询问和操作
+add -p          #直接进入patch模式
+git stash       #将当前工作区的修改推入栈中,工作区还原成最近一次commit的状态          
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3&gt;创建分支&lt;/h3&gt;
+&lt;h3&gt;分支&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git checkout -b x1 x2           #从x1分支创建x2分支,并切换到x2,与下两条指令合在一起等价
 git branch x1 x2                #从父分支x2创建分支x1，没有使用切换分支指令前，修改源文件,提交：
 git checkout x1                 #切换到之前创建的分支x1,这里认为,切换分支之前的修改提交是作用于“创建了x1分支的x2分支上
@@ -90,6 +102,7 @@ git branch -m name1 name2       #把name1改成name2,大写的M更强力
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;版本回溯&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git revert 版本号                #撤销修改,版本号最好是前一个提交的版本号,这样不用处理冲突...
+git reset --hard 版本号  复位操作
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;打包&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git archive --format=zip --prefix=mysite-1.0/1.0 | gzip &amp;gt; mysite-1.0.zip
@@ -106,8 +119,7 @@ git blame file                  #按行输出file,每行前面会写该行提交
 git blame -L number1,number2 file #查看num1到num2行的记录
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;其他&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git add -i                      #删除暂存区里的提交；进入交互add界面,选择3.revert,再输入1
-文件开始状态为X1,修改之后为X2,此时使用add命令;再次修改源文件,状态为X3;也就是说版本库里文件是X1状态,暂存区文件是X2状态,实际硬盘上是X3状态,使用：
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;文件开始状态为X1,修改之后为X2,此时使用add命令;再次修改源文件,状态为X3;也就是说版本库里文件是X1状态,暂存区文件是X2状态,实际硬盘上是X3状态,使用：
 git diff                        #将暂存区文件X2和硬盘文件X3做比较
 git diff --cached               #将暂存区X2和版本库X1做比较
 git diff head                   #将硬盘X3和版本库X1做比较
@@ -117,7 +129,40 @@ git mv name1 name2              #将文件名name1改成name2,相当于(在硬�
 git commit -C head -a -amend
 git reset HEAD                  #复位HEAD提交,相当与删除了最新的一个提交记录,实际文件没有什么变化
 git gc                          #整理版本库,清理一些垃圾,根据提交日志,日志里没有的东西都会被删除.比如,之前复位了一些版本,文件还存在于硬盘上,执行本操作之后就复位的日志记录之后的修改都被删除了.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;设置.gitignore文件&lt;/h3&gt;
+
+&lt;p&gt;通过设置.gitignore文件来忽略跟踪满足特定规则的文件
+Windows下命名为 .gitignore.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;fd1/*           忽略所有名字是fd1的目录下的全部内容
+filename*       忽略所有filenameXXX的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;冲突&lt;/h3&gt;
+
+&lt;p&gt;当合并或其他时候就会遇到冲突,下面是某文本块冲突的实例&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;xxx
+&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; HEAD:filename
+    This is an apple
+=====
+    This is a banana
+&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; filename
+xxx
+一对&amp;#39;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;#39;和&amp;#39;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;#39;将冲突的文本块标记出来,&amp;#39;====&amp;#39;将修改后和修改前分割开
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;修改量少的话,可以直接依据上面的提示做编辑,复杂的话,使用    &lt;code&gt;git mergetool&lt;/code&gt; 打开合并工具,图形化合并文件.&lt;/p&gt;
+
+&lt;h3&gt;网络通信&lt;/h3&gt;
+
+&lt;h4&gt;三种方式&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;SSH  git@github.com:roliygu/RoliyOS.git 安全&lt;/li&gt;
+&lt;li&gt;git  git://github.com/roliygu/RoliyOS.git 据说速度最快&lt;/li&gt;
+&lt;li&gt;HTTP https://github.com/roliygu/RoliyOS.git 需要修改防火墙,不过我用着没改&lt;/li&gt;
+&lt;li&gt;pull和fetch的区别,前者从远程仓库取过来并合并到本地分支,后者只是取过来更新远程分支&lt;/li&gt;
+&lt;li&gt;pull命令带两个参数,远程版本库名称&lt;code&gt;origin&lt;/code&gt;即可,合并到本地分支&lt;code&gt;master&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
