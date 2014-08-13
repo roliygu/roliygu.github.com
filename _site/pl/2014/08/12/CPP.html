@@ -54,12 +54,10 @@
 <li><code>类型 (*指针变量名)(参数类型1, 参数类型2,...);</code></li>
 <li>例如,快速排序<code>qsort</code>的第三个参数就是函数指针</li>
 </ul>
-
-<p>代码</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">int min(int a,int b){return a&lt;b;}
-int (*pf)(int, int);
-pf = min;
-pf(1,2)             //函数指针名(实参表)
+<div class="highlight"><pre><code class="language-CPP" data-lang="CPP">    <span class="kt">int</span> <span class="nf">min</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span><span class="k">return</span> <span class="n">a</span><span class="o">&lt;</span><span class="n">b</span><span class="p">;}</span>
+    <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">pf</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+    <span class="n">pf</span> <span class="o">=</span> <span class="n">min</span><span class="p">;</span>
+    <span class="n">pf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>             <span class="c1">//函数指针名(实参表)</span>
 </code></pre></div>
 <ul>
 <li>C语言中的qsort函数
@@ -96,11 +94,9 @@ pf(1,2)             //函数指针名(实参表)
 <li>argc:代表命令行参数的个数,包括程序名;</li>
 <li>argv:指针数组,其中每个元素都是一个<code>char *</code>,argv[i]指向第i个参数</li>
 </ul>
-
-<p>代码</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">int main(int argc, char *argv[]){
-    xxx;
-}
+<div class="highlight"><pre><code class="language-CPP" data-lang="CPP">    <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+        <span class="n">xxx</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div>
 <h3>位运算(6种)</h3>
 
@@ -275,7 +271,7 @@ subC(int x, int y, int z):C(x, y){zz=z;}
     <span class="p">};</span>
     <span class="k">class</span> <span class="nc">CMaster</span><span class="p">{</span>
         <span class="n">CDog</span> <span class="o">*</span><span class="n">dogs</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-    <span class="p">}</span>
+    <span class="p">};</span>
 </code></pre></div>
 <h3>多态</h3>
 
@@ -306,6 +302,151 @@ subC(int x, int y, int z):C(x, y){zz=z;}
     <span class="p">}</span>
     <span class="n">Point</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SubPoint</span><span class="p">;</span>
     <span class="k">delete</span> <span class="n">p</span><span class="p">;</span>   <span class="c1">// 这里没写虚析构函数的话,就会有问题,只调用了基类的虚构函数</span>
+</code></pre></div>
+<h3>输出输入重定向</h3>
+
+<ul>
+<li>重定向
+
+<ul>
+<li>freopen(&quot;out.txt&quot;,&quot;w&quot;,stdout);</li>
+<li>freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);</li>
+<li>之后cout和cin都被导到相应的文件中</li>
+</ul></li>
+<li>cin&gt;&gt;x == false 时,输入结束;cin&gt;&gt;x直接返回值不是bool,这里是被强制转换的结果</li>
+</ul>
+<div class="highlight"><pre><code class="language-CPP" data-lang="CPP">    <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span>
+        <span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">x</span><span class="o">&gt;&gt;</span><span class="n">y</span><span class="p">;</span>
+        <span class="c1">// 将标准输出重定向到&quot;out.txt上&quot;</span>
+        <span class="n">freopen</span><span class="p">(</span><span class="s">&quot;out.txt&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
+        <span class="c1">// 将标准输入重定向到&quot;in.txt&quot;上</span>
+        <span class="n">freopen</span><span class="p">(</span><span class="s">&quot;in.txt&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1">// 错误输出没被重定向,依然输出到屏幕上</span>
+            <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&quot;error&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="c1">// 重定向输出到&quot;out.txt&quot;里</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">;</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3>istream成员函数</h3>
+
+<ul>
+<li>getline()
+
+<ul>
+<li>istream &amp; getline(char *buf, int bufSize);读到bufsize个字符或&#39;\n&#39;结束</li>
+<li>istream &amp; getline(char *buf, int bufSize, char delim);读到bufsize个字符或&#39;\n&#39;或字符delim结束</li>
+<li>上面两个是被重载的,&#39;\n&#39;和delim都不会被读入</li>
+</ul></li>
+<li>bool eof();判断输入流是否结束</li>
+<li>int peek();返回下一个字符,但不从流中去掉</li>
+<li>putback(char c);把字符放回输入流</li>
+<li>ignore(int Count=1, int delim = EOF);从流中删除掉Count个字符或一直到遇到EOF</li>
+</ul>
+
+<h3>文件操作</h3>
+
+<ul>
+<li><code>ifstream</code>,<code>ofstream</code>和<code>fstream</code></li>
+<li>打开文件
+
+<ul>
+<li>ios::out 输出到文件,删除原有文件内容</li>
+<li>ios::app 输出到文件,保留原有内容,在尾部添加</li>
+<li>ios::binary 以二进制文件格式打开文件</li>
+<li>通过初始化ofstream对象的方式来打开文件</li>
+<li>利用open()函数打开文件</li>
+<li>ofstream对象为Null说明打开失败</li>
+</ul></li>
+<li><p>读/写文件</p>
+
+<ul>
+<li>读写指针来指示文件读写位置</li>
+<li>写指针
+
+<ul>
+<li>long location = fout.tello();</li>
+<li>fout.seekp(10L[, ios::beg/ios::cur/ios::end])</li>
+<li>fout.write((const char *)(&amp;x), sizeof(x));//二进制写</li>
+<li>fout.get(c); //读取一个char</li>
+</ul></li>
+<li>读指针
+
+<ul>
+<li>long location = fout.tellg();</li>
+<li>fin.seekg(10L[, ios::beg/ios::cur/ios::end])</li>
+<li>fin.read((char *)(&amp;x), sizeof(x));//二进制读</li>
+<li>fin.put(c);//写入一个字符</li>
+</ul></li>
+<li>seek(location, ios::T)表示从T位置,移动location个位置.location可以为负数</li>
+</ul></li>
+<li><p>关闭文件</p></li>
+<li><p>文本文件和二进制文件的区别</p>
+
+<ul>
+<li>Unix/Linux下没有区别</li>
+<li>Windows下,文本文件以&quot;\r\n&quot;作为换行符
+
+<ul>
+<li>读出时,系统将<code>0x0d0a</code>读成<code>0x0a</code></li>
+<li>写入时,对于<code>0x0a</code>系统自动写入<code>0x0d</code></li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="highlight"><pre><code class="language-CPP" data-lang="CPP">    <span class="cp">#include&lt;ftream&gt;</span>
+    <span class="c1">// 建立对象的方式打开</span>
+    <span class="n">ofstream</span> <span class="nf">outFile</span><span class="p">(</span><span class="s">&quot;clients.dat&quot;</span><span class="p">,</span> <span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="o">|</span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+    <span class="c1">// open()函数来打开</span>
+    <span class="n">ofst</span> <span class="n">outFile2</span><span class="p">;</span>
+    <span class="n">outFile2</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;clients.dat2&quot;</span><span class="p">,</span> <span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="o">|</span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+    <span class="c1">// 获取写指针位置</span>
+    <span class="kt">long</span> <span class="n">location</span> <span class="o">=</span> <span class="n">outFile</span><span class="p">.</span><span class="n">tello</span><span class="p">();</span>
+
+    <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+
+    <span class="p">}</span>
+</code></pre></div>
+<h3>函数模版</h3>
+
+<ul>
+<li>编译的时候根据实际情况生成对应类型的函数,然后调用</li>
+<li>函数的匹配顺序
+
+<ol>
+<li>参数完全匹配的普通函数</li>
+<li>参数完全匹配的模版函数</li>
+<li>实参经过类型转换之后匹配的参数</li>
+</ol></li>
+</ul>
+<div class="highlight"><pre><code class="language-CPP" data-lang="CPP">    <span class="c1">// 两个模版函数形成重载</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">Swap</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span>
+        <span class="n">xxx</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T2</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">Swap</span><span class="p">(</span><span class="n">T1</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="n">T2</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">){</span>
+        <span class="n">xxx</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3>类模版</h3>
+
+<ul>
+<li>同一类模版生成的两个模版类是不兼容的,就算两个模版类的类型是一致的</li>
+</ul>
+<div class="highlight"><pre><code class="language-CPP" data-lang="CPP">    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+    <span class="k">class</span> <span class="nc">Point</span><span class="p">{</span>
+        <span class="k">public</span><span class="o">:</span>
+            <span class="n">T</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
+            <span class="n">T</span> <span class="nf">F</span><span class="p">();</span>
+    <span class="p">};</span>
+    <span class="n">T</span> <span class="n">Point</span><span class="o">::</span><span class="n">F</span><span class="p">(){</span>
+        <span class="n">xxx</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// 类模版的实例化</span>
+    <span class="n">Point</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;aaa&quot;</span><span class="p">);</span>
 </code></pre></div>
 </article> <!-- end #post__content -->
 
