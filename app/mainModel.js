@@ -16,7 +16,7 @@ define(['jquery',
             labelRow:1
         },
         path:{
-            scatterTestDataUrl: '../source/ScatterTestData.txt'
+            scatterTestDataUrl: '../static/ScatterTestData.txt'
         },
         initialize: function (opts) {
             var _this = this;
