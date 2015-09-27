@@ -7,14 +7,14 @@ requirejs.config({
     baseUrl: 'lib',
     paths: {
         app: '../app',
-        jquery: '../lib/jquery',
-        jqueryFileStyle: '../lib/jquery-filestyle',
-        underscore: '../lib/underscore',
-        backbone: '../lib/backbone',
-        require: '../lib/require',
-        echarts: '../lib/dist',
-        bootbox: '../lib/bootbox.min',
-        bootstrap: '../lib/bootstrap.min',
+        jquery: './jquery',
+        jqueryFileStyle: './jquery-filestyle',
+        underscore: './underscore',
+        backbone: './backbone',
+        require: './require',
+        echarts: './dist',
+        bootbox: './bootbox.min',
+        bootstrap: './bootstrap.min',
         view: '../app/mainView',
         model: '../app/mainModel'
     }
