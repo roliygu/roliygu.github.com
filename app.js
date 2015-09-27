@@ -17,6 +17,18 @@ requirejs.config({
         bootstrap: './bootstrap.min',
         view: '../app/mainView',
         model: '../app/mainModel'
+    },
+    shim:{
+        'backbone':{
+            deps: ['underscore', 'jquery'],
+            exports: 'Backbone'
+        },
+        'underscore':{
+            export: '_'
+        },
+        'jqueryFileStyle':['jquery'],
+        'bootstrap': ['jquery'],
+        'bootbox':['bootstrap']
     }
 });
 
