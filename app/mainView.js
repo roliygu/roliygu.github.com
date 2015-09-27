@@ -12,7 +12,8 @@ define(['jquery',
     var mainView = backbone.View.extend({
 
         events:{
-            "change .file-input": "changeFile"
+            "change .file-input": "changeFile",
+            "click .scatter-test-data": "downloadScatterTestData",
         },
         init: function(opts){
 
@@ -43,6 +44,9 @@ define(['jquery',
 
             return;
 
+        },
+        downloadScatterTestData: function(){
+            this.model.downloadScatterTestData();
         },
         changeFile:function(event){
             var _this = this;

@@ -15,6 +15,9 @@ define(['jquery',
             dataRow:0,
             labelRow:1
         },
+        path:{
+            scatterTestDataUrl: '../source/ScatterTestData.txt'
+        },
         initialize: function (opts) {
             var _this = this;
             this.opts = opts;
@@ -245,6 +248,9 @@ define(['jquery',
                 return _this.rowType.dataRow;
             }
         },
+        downloadScatterTestData: function(){
+            this.download(this.path.scatterTestDataUrl);
+        },
         getGraphData:function(){
 
             var dtd = $.Deferred();
@@ -279,7 +285,16 @@ define(['jquery',
             });
 
             return dtd.promise();
-        }
+        },
+        download: function(url) {
+
+            var iframe = '<iframe id="my_iframe_xxxw" style="display:none;">';
+            if ($('#my_iframe_xxxw').length == 0) {
+                $('body').append(iframe);
+            }
+
+            document.getElementById('my_iframe_xxxw').src = url;
+        },
     });
     return Model;
 });
