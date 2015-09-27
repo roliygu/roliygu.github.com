@@ -84,8 +84,7 @@ define(['jquery',
                 ]
             };
 
-            debugger;
-            if(_this.labels){A
+            if(_this.labels){
                 // 有多组不同类的数据
                 defaultOption.legend = {
                     data: _this.labels
