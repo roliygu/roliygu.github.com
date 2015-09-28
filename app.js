@@ -7,7 +7,7 @@ requirejs.config({
     baseUrl: 'lib',
     paths: {
         app: '../app',
-        jquery: './jquery',
+        jquery: './jquery.min',
         jqueryFileStyle: './jquery-filestyle',
         underscore: './underscore',
         backbone: './backbone',
