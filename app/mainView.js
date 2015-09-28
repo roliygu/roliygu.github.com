@@ -15,7 +15,7 @@ define(['jquery',
             "change .file-input": "changeFile",
             "click .scatter-test-data": "downloadScatterTestData",
         },
-        init: function(opts){
+        initialize: function(opts){
 
             this.model = new Model();
             this.tplUrl = '../app/main.tpl';

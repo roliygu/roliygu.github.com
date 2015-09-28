@@ -16,7 +16,7 @@ requirejs.config({
         bootbox: './bootbox.min',
         bootstrap: './bootstrap.min',
         view: '../app/mainView',
-        model: '../app/mainModel'
+        model: '../app/mainModel',
     },
     shim:{
         'backbone':{
@@ -37,7 +37,6 @@ requirejs.config({
 requirejs(['jquery','view'],function($, view){
 
     var view = new view({el: ".main-view"});
-    view.init();
     view.render();
 
 });

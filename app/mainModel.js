@@ -5,7 +5,10 @@ define(['jquery',
         'underscore',
         'backbone',
         'bootstrap',
-        'bootbox'],function($, _, backbone, bootstrap, bootbox){
+        'bootbox',
+        'require'],function($, _, backbone, bootstrap, bootbox, require){
+
+
     var Model = backbone.Model.extend({
 
         inputFile:{
@@ -25,7 +28,6 @@ define(['jquery',
                 _this.inputFile = event.target.result;
                 _this.parseInputFile();
             });
-
         },
         getScatterOption: function(){
             var _this = this;
@@ -249,7 +251,25 @@ define(['jquery',
             }
         },
         downloadScatterTestData: function(){
-            this.download(this.path.scatterTestDataUrl);
+            var _this = this;
+            _this.getAjaxData(_this.path.scatterTestDataUrl, "text").done(function(res){
+                _this.downloadFile("ScatterTestData.txt", res);
+            });
+        },
+        getAjaxData: function(_url, _dataType){
+            var _this = this;
+            var dtd = $.Deferred();
+
+            $.ajax({
+                url: _url,
+                dataType: _dataType,
+                success: function(res){
+                    debugger;
+                    dtd.resolve(res);
+                }
+            });
+
+            return dtd.promise();
         },
         getGraphData:function(){
 
@@ -295,6 +315,21 @@ define(['jquery',
 
             document.getElementById('my_iframe_xxxw').src = url;
         },
+        /**
+         *
+         * @param fileName
+         * @param content
+         * 从前端下载文件
+         */
+        downloadFile: function (fileName, content){
+            var aLink = document.createElement('a');
+            var blob = new Blob([content]);
+            var evt = document.createEvent("HTMLEvents");
+            evt.initEvent("click", false, false);
+            aLink.download = fileName;
+            aLink.href = URL.createObjectURL(blob);
+            aLink.dispatchEvent(evt);
+        }
     });
     return Model;
 });
