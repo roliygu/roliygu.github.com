@@ -264,7 +264,6 @@ define(['jquery',
                 url: _url,
                 dataType: _dataType,
                 success: function(res){
-                    debugger;
                     dtd.resolve(res);
                 }
             });
