@@ -34,7 +34,7 @@ requirejs.config({
 
 // Start loading the main app file. Put all of
 // your application logic in there.
-requirejs(['jquery','underscore','backbone', 'echarts', 'echarts/chart/force', 'view', 'echarts/chart/chord'],function($, _, backbone, ec, force, view){
+requirejs(['jquery','underscore','backbone', 'echarts', 'view'],function($, _, backbone, ec, view){
 
     var view = new view({el: ".main-view"});
     view.init();
