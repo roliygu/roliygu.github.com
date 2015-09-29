@@ -21,10 +21,23 @@ define(['jquery',
         path:{
             scatterTestDataUrl: '../static/ScatterTestData.txt'
         },
+        /**
+         * ScatterData
+         */
+        ScatterData:{
+            // labels:[]
+            // allData: []
+            current:{
+                x: 0,
+                y: 1
+            },
+            dataWidth:-1
+        },
         initialize: function (opts) {
             var _this = this;
             this.opts = opts;
             this.on("change:inputFile", function(){
+                _this.ScatterData = null;
                 _this.inputFile = event.target.result;
                 _this.parseInputFile();
             });
@@ -83,7 +96,7 @@ define(['jquery',
                 series : [
                     {
                         // name:xxx,
-                        type:'scatter',
+                        type:'scatter'
                         //data:[[xxx],[xxx]],
                     }
                 ]
@@ -137,12 +150,27 @@ define(['jquery',
             }else{
                 _this.inputData = result.resultData;
                 _this.labels = result.labels;
+
+
+
+
+
                 return;
             }
         },
+
+
+
         /**
          * 检查上传的数据是否符合规定.如果格式符合规定,则返回可供后续使用的数据格式
          * @param _data
+         * 返回的对象如果status=-1,表示数据有误,如果返回status=1,表示数据正常
+         * status=-1时,msg字段有效,表示错误信息
+         * status=1时,labels为空表示数据没有分类,如果不为空则labels为分类标签的数组
+         * status=1时,resultData为转成number的数据,resultData是一个三维列表,
+         *         第一维的index表示该数据的类别,如果数据无分类,则第一维长度为1;
+         *         第二维的index表示是该类数据中的第几个数据
+         *         第三维是这个数据
          */
         dataChecker: function(_data){
             var _this = this;
@@ -150,54 +178,62 @@ define(['jquery',
             var labels = [];
             var resultData = [];
 
+            var result = {
+                resultData: [],
+                labels: [],
+                status: -1
+            };
+
             // 如果首行为数据行,说明本数据文件没有分类
-            if(_this.getRowType(_data[0])===_this.rowType.dataRow){
-                labels = null;
+            if(_this.isDataRow(_data[0])){
+
+                result.labels = ['data'];
+
                 for(var i=0;i!==_data.length;i++){
-                    if(_this.getRowType(_data[0])===_this.rowType.labelRow){
-                        // 说明本应该是纯数据行的文件出现了标签行,此为错误情况
-                        return {
-                            status: -1,
-                            msg: "不应该出现 label 行".replace(/label/, _data[i])
-                        };
+                    if(_this.isLabelRow(_data[i])){
+                        result.msg = "不应该出现 label 行".replace(/label/, _data[i]);
+                        return result;
                     }
+
                     var thisRowList = [];
                     _.each(_data[i].split(','), function(item){
                         var tmp = parseFloat(item);
                         if(!tmp){
-                            // 数据行出现了不能转换成数字的数据,此为错误情况
-                            return {
-                                status: -1,
-                                msg: "第 i 行 item 不能转成数字".replace(/i/, i.toString()).replace(/item/, item)
-                            }
+                            result.msg = "第 i 行 item 不能转成数字".replace(/i/, i.toString()).replace(/item/, item);
+                            return result;
                         }else{
-                            thisRowList.push(parseFloat(item));
+                            thisRowList.push(tmp);
                         }
                     });
-                    resultData.push(thisRowList);
+
+                    if(!result.dataWidth){
+                        result.dataWidth = thisRowList.length;
+                    }else{
+                        if(result.dataWidth !== thisRowList.length){
+                            result.msg = "第 i 行数据缺失".replace(/i/, i.toString);
+                            return result;
+                        }
+                    }
+
+                    result.resultData.push(thisRowList);
                 }
-                return {
-                    status: 1,
-                    resultData: resultData
-                }
+
+                return result;
             }
 
-            // 第一行为标签行
+            // 第一行为标签行,表示是有分类的数据
             labels.push(_data[0]);
             var lastRowType = _this.rowType.labelRow;
             var lastLabel = _data[0];
 
             var labelInputData = [];
             for(var i=1;i!==_data.length;i++){
-                var thisRowType = _this.getRowType(_data[i]);
 
-                if(thisRowType===_this.rowType.labelRow){
+                if(_this.isLabelRow(_data[i])){
 
                     if(lastRowType===_this.rowType.labelRow){
-                        return {
-                            status: -1,
-                            msg: "数据格式不正确: label标签的数据为空".replace(/label/, lastLabel)
-                        };
+                        result.msg = "数据格式不正确: label标签的数据为空".replace(/label/, lastLabel);
+                        return result;
                     }else{
 
                         labels.push(_data[i]);
@@ -212,15 +248,21 @@ define(['jquery',
                     _.each(_data[i].split(','), function(item){
                         var tmp = parseFloat(item);
                         if(!tmp){
-                            // 数据行出现了不能转换成数字的数据,此为错误情况
-                            return {
-                                status: -1,
-                                msg: "第 i 行 item 不能转成数字".replace(/i/, i.toString()).replace(/item/, item)
-                            }
+                            result.msg = "第 i 行 item 不能转成数字".replace(/i/, i.toString()).replace(/item/, item);
+                            return result;
                         }else{
-                            thisRowList.push(parseFloat(item));
+                            thisRowList.push(tmp);
                         }
                     });
+
+                    if(!result.dataWidth){
+                        result.dataWidth = thisRowList.length;
+                    }else{
+                        if(result.dataWidth !== thisRowList.length){
+                            result.msg = "第 i 行数据缺失".replace(/i/, i.toString);
+                            return result;
+                        }
+                    }
 
                     labelInputData.push(thisRowList);
                     lastRowType = _this.rowType.dataRow;
@@ -229,11 +271,7 @@ define(['jquery',
 
             resultData.push(labelInputData);
 
-            return {
-                status: 1,
-                labels: labels,
-                resultData: resultData
-            }
+            return result;
         },
         /**
          * 通过检查该行是否包含逗号来决定该行是标签行还是数据行
@@ -328,6 +366,23 @@ define(['jquery',
             aLink.download = fileName;
             aLink.href = URL.createObjectURL(blob);
             aLink.dispatchEvent(evt);
+        },
+        isDataRow: function(row){
+            var _this = this;
+            return _this.getRowType(row) === _this.rowType.dataRow;
+        },
+        isLabelRow: function(row){
+            var _this = this;
+            return _this.getRowType(row) === _this.rowType.labelRow;
+        },
+        /**
+         *
+         * @param _data
+         * @param index
+         * _data的第index行转成number列表,_data[index]应该已经被判断是dataRow
+         */
+        row2DataList: function(_data, index){
+
         }
     });
     return Model;
