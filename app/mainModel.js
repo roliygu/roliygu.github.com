@@ -21,10 +21,7 @@ define(['jquery',
         path:{
             scatterTestDataUrl: '../static/ScatterTestData.txt'
         },
-        /**
-         * ScatterData
-         */
-        ScatterData:{
+        ScatterData: {
             // labels:[]
             // allData: []
             current:{
@@ -37,15 +34,24 @@ define(['jquery',
             var _this = this;
             this.opts = opts;
             this.on("change:inputFile", function(){
-                _this.ScatterData = null;
+                _this.initScatterData();
                 _this.inputFile = event.target.result;
                 _this.parseInputFile();
             });
         },
+        initScatterData: function(){
+            this.ScatterData = {
+                current:{
+                    x: 0,
+                    y: 1
+                },
+                dataWidth:-1
+            }
+        },
         getScatterOption: function(){
             var _this = this;
 
-            if(!_this.inputData){
+            if(!_this.ScatterData.allData){
                 return null;
             }
 
@@ -102,17 +108,17 @@ define(['jquery',
                 ]
             };
 
-            if(_this.labels){
+            if(_this.ScatterData.labels){
                 // 有多组不同类的数据
                 defaultOption.legend = {
-                    data: _this.labels
+                    data: _this.ScatterData.labels
                 };
 
-                for(var i=0;i!=_this.inputData.length;i++){
+                for(var i=0;i!=_this.ScatterData.allData.length;i++){
                     defaultOption.series[i] = {
                         type:'scatter',
-                        name: _this.labels[i],
-                        data: _this.inputData[i]
+                        name: _this.ScatterData.labels[i],
+                        data: _this.ScatterData.allData[i]
                     }
                 }
 
@@ -124,7 +130,7 @@ define(['jquery',
                 defaultOption.series[0] = {
                     type:'scatter',
                     name: 'data',
-                    data: _this.inputData
+                    data: _this.ScatterData.allData
                 }
             }
 
@@ -137,18 +143,15 @@ define(['jquery',
                 return;
             }
 
-            if(!_this.inputData){
-                _this.inputData = {};
-            }
-
             var rows = _this.inputFile.split("\n");
             var result = _this.dataChecker(rows);
             if(result.status === -1){
                 bootbox.alert(result.msg);
                 return;
             }else{
-                _this.inputData = result.resultData;
-                _this.labels = result.labels;
+                _this.ScatterData.allData = result.resultData;
+                _this.ScatterData.labels = result.labels;
+                _this.ScatterData.dataWidth  = result.dataWidth
                 return;
             }
         },
