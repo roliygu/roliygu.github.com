@@ -143,18 +143,12 @@ define(['jquery',
 
             var rows = _this.inputFile.split("\n");
             var result = _this.dataChecker(rows);
-
             if(result.status === -1){
                 bootbox.alert(result.msg);
                 return;
             }else{
                 _this.inputData = result.resultData;
                 _this.labels = result.labels;
-
-
-
-
-
                 return;
             }
         },
@@ -210,7 +204,7 @@ define(['jquery',
                         result.dataWidth = thisRowList.length;
                     }else{
                         if(result.dataWidth !== thisRowList.length){
-                            result.msg = "第 i 行数据缺失".replace(/i/, i.toString);
+                            result.msg = "第 i 行数据缺失".replace(/i/, i.toString());
                             return result;
                         }
                     }
@@ -218,11 +212,12 @@ define(['jquery',
                     result.resultData.push(thisRowList);
                 }
 
+                result.status=1;
                 return result;
             }
 
             // 第一行为标签行,表示是有分类的数据
-            labels.push(_data[0]);
+            result.labels.push(_data[0]);
             var lastRowType = _this.rowType.labelRow;
             var lastLabel = _data[0];
 
@@ -235,12 +230,11 @@ define(['jquery',
                         result.msg = "数据格式不正确: label标签的数据为空".replace(/label/, lastLabel);
                         return result;
                     }else{
-
-                        labels.push(_data[i]);
+                        result.labels.push(_data[i]);
                         lastRowType = _this.rowType.labelRow;
                         lastLabel = _data[i];
 
-                        resultData.push(labelInputData);
+                        result.resultData.push(labelInputData);
                         labelInputData = [];
                     }
                 }else{
@@ -259,7 +253,7 @@ define(['jquery',
                         result.dataWidth = thisRowList.length;
                     }else{
                         if(result.dataWidth !== thisRowList.length){
-                            result.msg = "第 i 行数据缺失".replace(/i/, i.toString);
+                            result.msg = "第 i 行数据缺失".replace(/i/, i.toString());
                             return result;
                         }
                     }
@@ -269,8 +263,8 @@ define(['jquery',
                 }
             }
 
-            resultData.push(labelInputData);
-
+            result.resultData.push(labelInputData);
+            result.status = 1;
             return result;
         },
         /**
@@ -374,15 +368,6 @@ define(['jquery',
         isLabelRow: function(row){
             var _this = this;
             return _this.getRowType(row) === _this.rowType.labelRow;
-        },
-        /**
-         *
-         * @param _data
-         * @param index
-         * _data的第index行转成number列表,_data[index]应该已经被判断是dataRow
-         */
-        row2DataList: function(_data, index){
-
         }
     });
     return Model;
