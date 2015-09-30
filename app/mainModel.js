@@ -49,7 +49,6 @@ define(['jquery',
             }
         },
         getScatterOption: function(){
-            debugger;
             var _this = this;
 
             if(!_this.ScatterData.allData){
@@ -109,22 +108,22 @@ define(['jquery',
                 ]
             };
 
+            _this.ScatterData.currentData = _this.pickXYFromData(_this.ScatterData.current.x, _this.ScatterData.current.y);
+
             if(_this.ScatterData.labels){
                 defaultOption.legend = {
                     data: _this.ScatterData.labels
                 };
 
-                debugger;
-                for(var i=0;i!=_this.ScatterData.allData.length;i++){
+                for(var i=0;i!=_this.ScatterData.currentData.length;i++){
                     defaultOption.series[i] = {
                         type:'scatter',
                         name: _this.ScatterData.labels[i],
-                        data: _this.ScatterData.allData[i]
+                        data: _this.ScatterData.currentData[i]
                     }
                 }
             }
 
-            debugger;
             return defaultOption;
         },
         parseInputFile: function(){
@@ -295,6 +294,20 @@ define(['jquery',
             });
 
             return dtd.promise();
+        },
+        pickXYFromData:function(_x, _y){
+            var _this = this;
+            var result = [];
+
+            _.map(_this.ScatterData.allData, function(item){
+                var tmpResult = [];
+                _.map(item, function(t){
+                    tmpResult.push([t[_x], t[_y]]);
+                });
+                result.push(tmpResult);
+            })
+
+            return result;
         },
         getGraphData:function(){
 

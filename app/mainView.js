@@ -17,6 +17,7 @@ define(['jquery',
         events:{
             "change .file-input": "changeFile",
             "click .scatter-test-data": "downloadScatterTestData",
+            "click .choose-which-dimension-btn": "setCurrentXY",
         },
         initialize: function(opts){
 
@@ -41,15 +42,20 @@ define(['jquery',
             this.loadCss('../css/select2.min.css');
             this.loadCss('../css/select2-bootstrap.min.css');
         },
+        initScatterChart: function(){
+            var _this = this;
+            $(".echarts-view").width(1400);
+            $(".echarts-view").height(600);
+            _this.scatter = echarts.init($(_this.el).find(".echarts-view")[0]);
+        },
         renderScatterChart: function(){
             var _this = this;
 
+            if(!_this.scatter){
+                _this.initScatterChart();
+            }
             var option = _this.model.getScatterOption();
-
-            $(".echarts-view").width(1400);
-            $(".echarts-view").height(600);
-            var scatter = echarts.init($(_this.el).find(".echarts-view")[0]);
-            scatter.setOption(option);
+            _this.scatter.setOption(option);
 
             return;
 
@@ -65,7 +71,6 @@ define(['jquery',
                 // event.target.result 就是文件的内容
                 _this.model.set("inputFile", event.target.result);
 
-                debugger;
                 if(_this.model.ScatterData.dataWidth > 2){
                     _this.setCurrentXY();
                 }
@@ -111,8 +116,14 @@ define(['jquery',
         setCurrentXY: function(){
             var _this = this;
 
+            if(!_this.model.ScatterData.allData){
+                return;
+            }
+
             // 导入模板,渲染两个下拉菜单
-            _this.chooseDimensionTpl = _this.getTpl(_this.tplUrl, "choose-which-dimension-tpl");
+            if(!_this.chooseDimensionTpl){
+                _this.chooseDimensionTpl = _this.getTpl(_this.tplUrl, "choose-which-dimension-tpl");
+            }
 
             var _data = [];
             for(var i=0;i!=_this.model.ScatterData.dataWidth;i++){
@@ -122,16 +133,17 @@ define(['jquery',
                 })
             }
 
-            debugger;
             var dia = bootbox.dialog({
+                title: "选择",
                 message : _this.chooseDimensionTpl,
-                onEscape : false,
                 buttons:{
                     'chosen':{
-                        label:'已选定,下一步',
+                        label:'确定',
                         className:'btn-primary',
                         callback:function(){
-
+                            _this.model.ScatterData.current.x = $(".choose-x").val();
+                            _this.model.ScatterData.current.y = $(".choose-y").val();
+                            _this.renderScatterChart();
                         }
                     },
                     'success':{
@@ -152,13 +164,6 @@ define(['jquery',
 
             $(".choose-x").html(html);
             $(".choose-y").html(html);
-
-            $(".choose-x").on("change", function(event){
-                _this.model.ScatterData.current.x = parseInt(event.currentTarget.value);
-            });
-            $(".choose-y").on("change", function(event){
-                _this.model.ScatterData.current.y = parseInt(event.currentTarget.value);
-            });
         }
 
 
