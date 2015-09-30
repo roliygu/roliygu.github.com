@@ -5,7 +5,9 @@ define(['jquery',
         'model',
         'jqueryFileStyle',
         'echarts',
-        'echarts/chart/scatter'],function ($, _, backbone, require, Model, jqueryFileStyle, echarts) {
+        'bootstrap',
+        'bootbox',
+        'echarts/chart/scatter',],function ($, _, backbone, require, Model, jqueryFileStyle, echarts, bootstrap, bootbox) {
 
     var tpls = {};
 
@@ -55,6 +57,12 @@ define(['jquery',
             reader.onload = function(event){
                 // event.target.result 就是文件的内容
                 _this.model.set("inputFile", event.target.result);
+
+                debugger;
+                if(_this.model.ScatterData.dataWidth > 2){
+                    _this.setCurrentXY();
+                }
+
                 _this.renderScatterChart();
             };
             reader.readAsText(file);
@@ -92,6 +100,33 @@ define(['jquery',
 
                 return tpls[id];
             }
+        },
+        setCurrentXY: function(){
+            var _this = this;
+
+            // 导入模板,渲染两个下拉菜单
+            _this.chooseDimensionTpl = _this.getTpl(_this.tplUrl, "choose-which-dimension-tpl");
+
+            bootbox.dialog({
+                message : _this.chooseDimensionTpl,
+                onEscape : false,
+                buttons:{
+                    'chosen':{
+                        label:'已选定,下一步',
+                        className:'btn-primary',
+                        callback:function(){
+
+                        }
+                    },
+                    'success':{
+                        label:'帮我降到2维',
+                        className:'btn-success',
+                        callback:function(){
+
+                        }
+                    }
+                }
+            });
         }
 
 
