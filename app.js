@@ -15,6 +15,7 @@ requirejs.config({
         echarts: './dist',
         bootbox: './bootbox.min',
         bootstrap: './bootstrap.min',
+        select2: './select2',
         view: '../app/mainView',
         model: '../app/mainModel',
     },

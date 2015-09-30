@@ -49,6 +49,7 @@ define(['jquery',
             }
         },
         getScatterOption: function(){
+            debugger;
             var _this = this;
 
             if(!_this.ScatterData.allData){
@@ -109,11 +110,11 @@ define(['jquery',
             };
 
             if(_this.ScatterData.labels){
-                // 有多组不同类的数据
                 defaultOption.legend = {
                     data: _this.ScatterData.labels
                 };
 
+                debugger;
                 for(var i=0;i!=_this.ScatterData.allData.length;i++){
                     defaultOption.series[i] = {
                         type:'scatter',
@@ -121,20 +122,9 @@ define(['jquery',
                         data: _this.ScatterData.allData[i]
                     }
                 }
-
-            }else{
-                defaultOption.legend = {
-                    data: ['data']
-                };
-
-                defaultOption.series[0] = {
-                    type:'scatter',
-                    name: 'data',
-                    data: _this.ScatterData.allData
-                }
             }
 
-
+            debugger;
             return defaultOption;
         },
         parseInputFile: function(){
@@ -212,9 +202,10 @@ define(['jquery',
                         }
                     }
 
-                    result.resultData.push(thisRowList);
+                    resultData.push(thisRowList);
                 }
 
+                result.resultData.push(resultData);
                 result.status=1;
                 return result;
             }

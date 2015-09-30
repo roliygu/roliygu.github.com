@@ -7,7 +7,8 @@ define(['jquery',
         'echarts',
         'bootstrap',
         'bootbox',
-        'echarts/chart/scatter',],function ($, _, backbone, require, Model, jqueryFileStyle, echarts, bootstrap, bootbox) {
+        'select2',
+        'echarts/chart/scatter',],function ($, _, backbone, require, Model, jqueryFileStyle, echarts, bootstrap, bootbox, select2) {
 
     var tpls = {};
 
@@ -28,11 +29,17 @@ define(['jquery',
         },
         render: function(){
             this.$el.html(this.mainTpl);
-            this.loadCss("../css/jquery-filestyle.css");
-            this.loadCss("../css/bootstrap.css");
+
+            this.loadAllCss();
             $(".jfilestyle:file").jfilestyle({
                 buttonText: "上传数据文件"
             });
+        },
+        loadAllCss: function(){
+            this.loadCss("../css/jquery-filestyle.css");
+            this.loadCss("../css/bootstrap.css");
+            this.loadCss('../css/select2.min.css');
+            this.loadCss('../css/select2-bootstrap.min.css');
         },
         renderScatterChart: function(){
             var _this = this;
@@ -107,7 +114,16 @@ define(['jquery',
             // 导入模板,渲染两个下拉菜单
             _this.chooseDimensionTpl = _this.getTpl(_this.tplUrl, "choose-which-dimension-tpl");
 
-            bootbox.dialog({
+            var _data = [];
+            for(var i=0;i!=_this.model.ScatterData.dataWidth;i++){
+                _data.push({
+                    id: i,
+                    text: '第i列'.replace(/i/, (i+1).toString())
+                })
+            }
+
+            debugger;
+            var dia = bootbox.dialog({
                 message : _this.chooseDimensionTpl,
                 onEscape : false,
                 buttons:{
@@ -126,6 +142,22 @@ define(['jquery',
                         }
                     }
                 }
+            });
+
+
+            var html = "";
+            $.each(_data,function(index,value){
+                html += '<option value="' + _data[index].id+ '">'+_data[index].text+'</option>'
+            });
+
+            $(".choose-x").html(html);
+            $(".choose-y").html(html);
+
+            $(".choose-x").on("change", function(event){
+                _this.model.ScatterData.current.x = parseInt(event.currentTarget.value);
+            });
+            $(".choose-y").on("change", function(event){
+                _this.model.ScatterData.current.y = parseInt(event.currentTarget.value);
             });
         }
 
