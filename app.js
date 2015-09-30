@@ -10,7 +10,7 @@ requirejs.config({
         jquery: './jquery.min',
         jqueryFileStyle: './jquery-filestyle',
         underscore: './underscore',
-        backbone: './backbone',
+        backbone: './backbone.min',
         require: './require',
         echarts: './dist',
         bootbox: './bootbox.min',
