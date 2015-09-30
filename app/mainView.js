@@ -38,7 +38,7 @@ define(['jquery',
         },
         loadAllCss: function(){
             this.loadCss("../css/jquery-filestyle.css");
-            this.loadCss("../css/bootstrap.css");
+            this.loadCss("../css/bootstrap.min.css");
             this.loadCss('../css/select2.min.css');
             this.loadCss('../css/select2-bootstrap.min.css');
         },
