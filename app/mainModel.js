@@ -19,7 +19,8 @@ define(['jquery',
             labelRow:1
         },
         path:{
-            scatterTestDataUrl: '../static/ScatterTestData.txt'
+            scatterTestDataUrl: '../static/ScatterTestData.txt',
+            reduceDimensions: '/reduceDimensions'
         },
         ScatterData: {
             // labels:[]
@@ -33,6 +34,9 @@ define(['jquery',
         initialize: function (opts) {
             var _this = this;
             this.opts = opts;
+
+            this.baseUrl = "http://127.0.0.1:5000/dataAnalysisServer";
+
             this.on("change:inputFile", function(){
                 _this.initScatterData();
                 _this.inputFile = event.target.result;
@@ -144,9 +148,45 @@ define(['jquery',
                 return;
             }
         },
+        reduceDimensions: function(){
+            var dtd = $.Deferred();
 
+            var _this = this;
 
+            var _data = _this.parseAllData(_this.ScatterData.allData);
 
+            debugger;
+            $.ajax({
+                url: _this.baseUrl+_this.path.reduceDimensions,
+                dataType: 'json',
+                type: 'post',
+                traditional: true,
+                data: {'data':JSON.stringify(_data)},
+                success: function(res){
+                    dtd.resolve(res);
+                }
+            });
+
+            return dtd.promise();
+        },
+        parseAllData: function(){
+            var result = {};
+
+            for(var i=0;i!=this.ScatterData.labels.length;i++){
+                var sameLabelItems = this.ScatterData.allData[i];
+                var sameLabelJson = {};
+                for(var j=0;j!=sameLabelItems.length;j++){
+                    var thisRowJson = {};
+                    for(var k=0;k!=sameLabelItems[j].length;k++){
+                        thisRowJson[k.toString()] = sameLabelItems[j][k];
+                    }
+                    sameLabelJson[j.toString()] = thisRowJson;
+                }
+                result[this.ScatterData.labels[i]] = sameLabelJson;
+            }
+
+            return result;
+        },
         /**
          * 检查上传的数据是否符合规定.如果格式符合规定,则返回可供后续使用的数据格式
          * @param _data

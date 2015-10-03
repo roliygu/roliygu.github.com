@@ -150,7 +150,9 @@ define(['jquery',
                         label:'帮我降到2维',
                         className:'btn-success',
                         callback:function(){
+                            _this.model.reduceDimensions().done(function(res){
 
+                            });
                         }
                     }
                 }
